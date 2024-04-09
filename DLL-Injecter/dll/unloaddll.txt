@@ -1,0 +1,12 @@
+TCHAR DllPath[MAX_PATH] = {0};
+GetModuleFileName((HINSTANCE) &__ImageBase, DllPath, _countof(DllPath));
+
+wchar_t dir[_MAX_DIR] = {0};
+wchar_t drive[_MAX_DRIVE] = {0};
+wchar_t fName[_MAX_FNAME] = {0};
+wchar_t ext[_MAX_EXT] = {0};
+_wsplitpath_s(DllPath, &drive[0], _MAX_DRIVE, &dir[0], _MAX_DIR, &fName[0], _MAX_FNAME, &ext[0],
+              _MAX_EXT);
+
+HMODULE hModLib = GetModuleHandle(fName);
+FreeLibrary(hModLib);
